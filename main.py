@@ -6,6 +6,7 @@ import base64
 from test import api
 import json 
 import requests
+from waitress import serve
 app = Flask(__name__)
 
 
@@ -17,10 +18,10 @@ def login():
     
 @app.route('/menu',methods=['GET'])
 def menu():
-    res=api('142900.60b8f3a26b8f1.jpg')
-    res = json.loads(res)
-    print(res["detected"])
-    return render_template("menu.html",res=res)
+    #res=api('142900.60b8f3a26b8f1.jpg')
+    #res = json.loads(res)
+    #print(res["detected"])
+    return render_template("menu.html")
 
 @app.route('/analizar',methods=["POST"])
 def analizar():
@@ -49,5 +50,5 @@ def readb64(uri):
     return img
 
 if __name__ == "__main__":
-    
-    app.run(debug=True)
+    #serve(app, host='127.0.0.1')
+    app.run(debug=True,host='0.0.0.0')
